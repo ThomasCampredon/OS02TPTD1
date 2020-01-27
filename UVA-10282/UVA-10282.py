@@ -2,17 +2,20 @@ import sys
 
 while True:
     lines = sys.stdin.readlines()
-    del lines[0]
     while lines[-1] == '\n':
         del lines[-1]
 
     dico = {}
     finDuDico = False
     for line in lines :
+        tab = line.split()
         if (not finDuDico) :
-            tab = list(map(str, line.split()))
-            if (tab[1]=='') :
+            if line=="\n" :
                 finDuDico = True
-        
-        #pourcentageSupMoy = float(nbEtuSupMoy) / nbNote * 100
-        #print (str("{0:.3f}".format(pourcentageSupMoy))+ '%')
+            else:
+                dico[tab[1]] = tab[0]
+        else :
+            if tab[0] in dico:
+               print (dico[tab[0]])
+            else:
+                print("eh")
