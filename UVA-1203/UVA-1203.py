@@ -1,6 +1,13 @@
 import sys
 from operator import attrgetter, itemgetter
 
+def getFactors(n):    
+    result = []
+    for i in range (1, n+1):
+        if n%i==0:
+            result.append(i)
+    return result
+
 class Registre:
     def __init__(self, nom, temps):
         self.nom = nom
@@ -28,25 +35,22 @@ while True:
             finRegistre = True
     
     nombreDeRequeteAffichee=0
-    tempsEcoule=1
     nbRegistre = len(registres)
     registres.sort(key = lambda Registre: Registre.temps)
-    while nombreDeRequeteAffichee<=nbRequeteMax :
-        print(tempsEcoule) 
+    tempsEcoule = 0
+    
+    while nombreDeRequeteAffichee<nbRequeteMax :
         for k in range(0, nbRegistre):
-            if nombreDeRequeteAffichee<=nbRequeteMax :
-                if registres[k].temps > tempsEcoule:
-                    if registres[k].temps % tempsEcoule == 0: #verifier modulo
-                        nombreDeRequeteAffichee=nombreDeRequeteAffichee+1
-                        print("sup")
-                        print (registres[k].nom)
-                else:
-                    if tempsEcoule % registres[k].temps == 0:
-                        nombreDeRequeteAffichee=nombreDeRequeteAffichee+1
-                        print("inf")
-                        print (registres[k].nom)  
-        tempsEcoule=tempsEcoule+1
-            
+            if nombreDeRequeteAffichee<nbRequeteMax :
+                if registres[k].temps in getFactors(tempsEcoule):
+                    nombreDeRequeteAffichee+=1
+                    print(registres[k].nom)
+        tempsEcoule=tempsEcoule+1       
+                
+                
+               
+        
+       
     
 
             
