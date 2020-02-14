@@ -1,0 +1,6 @@
+chaise 36.45
+table 27.30
+nappe 12.00
+
+3 nappe
+4 table
