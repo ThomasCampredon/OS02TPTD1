@@ -1,13 +1,13 @@
 import sys
 
-while True:
+stop = False
+while not stop:
     lines = sys.stdin.readlines()
-    while lines[-1] == '\n':
-        del lines[-1]
     
     dico = {}
     finDuDico = False
     somme = 0.00
+    panierok = True
     for line in lines :
         tab = line.split()
         if (not finDuDico) :
@@ -16,7 +16,14 @@ while True:
             else:
                 dico[tab[0]] = float(tab[1])
         else :
-            somme = somme + dico[tab[1]]*int(tab[0])
+            if (tab[1] not in dico):
+                panierok = False
+            else:
+                somme = somme + dico[tab[1]]*float(tab[0])
 
-    print("%.2f" % somme)
+    if (panierok):
+        print("%.2f" % somme)
+    else:
+        print("Panier invalide")
+    stop = True
 
